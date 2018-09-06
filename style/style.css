@@ -1,20 +1,9 @@
 html {
-    background-color: #1e1e1d;
+    background-color:white;
     font-size: 20px;
     font-family: "TH Sarabun New";
-}
-body {
-    width: 600px;
-    margin: 0 auto;
-    background-color: #ff652f;
-    border: 3px solid black;
-    padding: 0 20px 20px 20px
 }
 h1 {
     text-align: center;
     color: #1a1a1d;
-}
-img {
-    display: block;
-    margin: 0 auto;
 }
