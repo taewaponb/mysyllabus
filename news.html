@@ -59,6 +59,7 @@
         </div>
     </nav>
 
+    <!-- LOGIN -->
     <div id="loginmodal" class="modal">
 
         <form class="modal-content animate" action="/action_page.php">
@@ -79,49 +80,64 @@
         </form>
     </div>
 
-</body>
-<div class="container">
-    <h2>KKU NEWS</h2>
-    <hr>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 50%;">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <a id="firstnewslink" href="">
-                    <h4 id="firstnewstitle"></h4>
-                    <img src="la.jpg" id="firstnews" alt="Los Angeles" style="width:100%;">
-                </a>
-            </div>
-
-            <div class="item">
-                <a id="secondnewslink" href="">
-                    <h4 id="secondnewstitle"></h4>
-                    <img src="chicago.jpg" id="secondnews" alt="Chicago" style="width:100%;">
-                </a>
-            </div>
-
-            <div class="item">
-                <a id="thirdnewslink" href="">
-                    <h4 id="thirdnewstitle"></h4>
-                    <img src="ny.jpg" id="thirdnews" alt="New york" style="width:100%;">
-                </a>
-            </div>
+    <div class="container">
+        <!-- HEAD -->
+        <div class="jumbotron p-3 p -md-5 text-white rounded bg-dark">
+            <div class="col-md-6 px-0">
+                <h1 class="display-4 font-italic" target="_blank">KKU NEWS</h1>
+                </div>
         </div>
-    </div>
+        
+        <div class="row mb-2">
 
-    <p></p>
-    <h2>OTHER NEWS</h2>
-    <hr>
-    <div id="stage">STAGE</div>
+                <div class="col-md-6">
+                  <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+                    <div class="card-body d-flex flex-column align-items-start">
+                      <strong class="d-inline-block mb-2 text-primary">1</strong>
+                      <h3 class="mb-0">
+                        <a  id="firstnewstitle" class="text-dark" href="#">NEWS TITLE</a>
+                      </h3>
+                      <div class="mb-1 text-muted">DATE</div>
+                      <a id="firstnewslink" href="#" target="_blank">Continue reading</a>
+                    </div>
+                    <img id="firstnews" class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
+                  </div>
+                </div>
+                
+                <div class="col-md-6">
+                  <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+                    <div class="card-body d-flex flex-column align-items-start">
+                      <strong class="d-inline-block mb-2 text-primary">2</strong>
+                      <h3 class="mb-0">
+                        <a id="secondnewstitle" class="text-dark" href="#">NEWS TITLE</a>
+                      </h3>
+                      <div class="mb-1 text-muted">DATE</div>
+                      <a id="secondnewslink" href="#" target="_blank">Continue reading</a>
+                    </div>
+                    <img id="secondnews" class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
+                  </div>
+                </div>
 
-</div>
+                <div class="col-md-6">
+                        <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+                          <div class="card-body d-flex flex-column align-items-start">
+                            <strong class="d-inline-block mb-2 text-primary">3</strong>
+                            <h3 class="mb-0">
+                              <a id="thirdnewstitle" class="text-dark" href="#">NEWS TITLE</a>
+                            </h3>
+                            <div class="mb-1 text-muted">DATE</div>
+                            <a id="thirdnewslink" href="#" target="_blank">Continue reading</a>
+                          </div>
+                          <img id="thirdnews" class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
+                        </div>
+                      </div>
+                </div>
+
+                <footer class="container">
+                        <p class="float-right"><a href="#">Back to top</a></p>
+                        <p>Create by <a href="https://www.facebook.com/surawit.wiriyasrisuwatthana.7">K A K D E N</a></p>
+                        <p>Thank to <a href="https://getbootstrap.com/">Bootstrap</a></p>
+                      </footer>
 </body>
 
 <script>
