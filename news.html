@@ -175,7 +175,7 @@
                     </div>
         </div>
 
-        <h2>OTHER NEWS</h2>
+        <h2>OLDER NEWS</h2>
         <hr>
         <div id="stage">STAGE</div>
         <hr>
@@ -280,7 +280,7 @@
                 var result = "<ul>";
                 var j = jd['news'];
                 for (i = 6; i < 30; i++) {
-                    result += '<li><a href="' + j[i].url + '">' + j[i].title + '</a></li>';
+                    result += '<li><a href="' + j[i].url + '" target="_blank" >' + j[i].title + '</a></li>';
                 }
                 result += "</ul>";
                 $('#stage').html(result);
