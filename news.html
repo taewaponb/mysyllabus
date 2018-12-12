@@ -2,16 +2,20 @@
 <html>
 
 <head>
+    <title>My Syllabus | News</title>
+
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>My Syllabus | News</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
     <link rel="shortcut icon" href="image/mysyllabus.ico" />
@@ -49,41 +53,132 @@
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <input class="btn btn-outline-success my-2 my-sm-0" type="button" value="Login" onclick="document.getElementById('loginmodal').style.display='block'" style="width:auto;" />
+                <input class="btn btn-outline-success my-2 my-sm-0" type="button" value="Login" onclick="document.getElementById('loginmodal').style.display='block'"
+                    style="width:auto;" />
             </form>
         </div>
     </nav>
- 
-<div id="loginmodal" class="modal">
-  
-  <form class="modal-content animate" action="/action_page.php">
 
-    <div class="container">
-      <input type="text" placeholder="Username" name="uname" required>
-      <input type="password" placeholder="Password" name="psw" required>
-      <button type="submit">Login</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
+    <div id="loginmodal" class="modal">
+
+        <form class="modal-content animate" action="/action_page.php">
+
+            <div class="container">
+                <input type="text" placeholder="Username" name="uname" required>
+                <input type="password" placeholder="Password" name="psw" required>
+                <button type="submit">Login</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('loginmodal').style.display='none'" class="cancelbtn">Cancel</button>
+                <span class="psw"> <a href="#">Forgot password?</a></span>
+            </div>
+        </form>
     </div>
 
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('loginmodal').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="psw"> <a href="#">Forgot password?</a></span>
+</body>
+<div class="container">
+    <h2>KKU NEWS</h2>
+    <hr>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 50%;">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <a id="firstnewslink" href="">
+                    <h4 id="firstnewstitle"></h4>
+                    <img src="la.jpg" id="firstnews" alt="Los Angeles" style="width:100%;">
+                </a>
+            </div>
+
+            <div class="item">
+                <a id="secondnewslink" href="">
+                    <h4 id="secondnewstitle"></h4>
+                    <img src="chicago.jpg" id="secondnews" alt="Chicago" style="width:100%;">
+                </a>
+            </div>
+
+            <div class="item">
+                <a id="thirdnewslink" href="">
+                    <h4 id="thirdnewstitle"></h4>
+                    <img src="ny.jpg" id="thirdnews" alt="New york" style="width:100%;">
+                </a>
+            </div>
+        </div>
     </div>
-  </form>
+
+    <p></p>
+    <h2>OTHER NEWS</h2>
+    <hr>
+    <div id="stage">STAGE</div>
+
 </div>
+</body>
 
 <script>
-// Get the modal
-var modal = document.getElementById('loginmodal');
+    $(document).ready(function () {
+        $("body").ready(function (event) {
+            $.getJSON('https://www.kku.ac.th/ikku/api/news/services/topNews.php', function (jd, index) {
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+                var firtitle = document.querySelector('#firstnewstitle');
+                var sectitle = document.querySelector('#secondnewstitle');
+                var thititle = document.querySelector('#thirdnewstitle');
+
+                var firnews = document.querySelector('#firstnews');
+                var secnews = document.querySelector('#secondnews');
+                var thinews = document.querySelector('#thirdnews');
+
+                var firlink = document.querySelector('#firstnewslink');
+                var seclink = document.querySelector('#secondnewslink');
+                var thilink = document.querySelector('#thirdnewslink');
+
+                var j = jd['news'];
+
+                firnews.setAttribute('src', j[0].pictitle);
+                firlink.setAttribute('href', j[0].url);
+                firtitle.textContent = j[0].title;
+                firnews.style.display = "block";
+                firnews.style.margin = "0 auto";
+
+                secnews.setAttribute('src', j[1].pictitle);
+                seclink.setAttribute('href', j[1].url);
+                sectitle.textContent = j[1].title;
+                secnews.style.display = "block";
+                secnews.style.margin = "0 auto";
+
+                thinews.setAttribute('src', j[2].pictitle);
+                thilink.setAttribute('href', j[2].url);
+                thititle.textContent = j[2].title;
+                thinews.style.display = "block";
+                thinews.style.margin = "0 auto";
+
+                var result = "<ul>";
+                var j = jd['news'];
+                for (i = 3; i < 30; i++) {
+                    result += '<li><a href="' + j[i].url + '">' + j[i].title + '</a></li>';
+                }
+                result += "</ul>";
+                $('#stage').html(result);
+            });
+        });
+    });
+
+    // When the user clicks anywhere outside of the modal, close it
+    var modal = document.getElementById('loginmodal');
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
     }
-}
 </script>
 
 </body>
