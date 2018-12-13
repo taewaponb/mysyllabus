@@ -82,3 +82,7 @@ body {
     margin-top: 7rem;
   }
 }
+
+.regform {
+  display: none;
+}

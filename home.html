@@ -154,11 +154,13 @@
 
   <!-- LOGIN -->
   <div id="loginmodal" class="modal">
-    <form class="modal-content animate" action="/action_page.php">
+    <form class="modal-content animate">
       <div class="container">
-        <input type="text" placeholder="Username" name="uname" required>
-        <input type="password" placeholder="Password" name="psw" required>
+        <input type="text" placeholder="Email">
+        <input type="password" placeholder="Password">
         <button type="submit">Login</button>
+        <hr>
+        <button onclick="document.querySelector('.regform').style.display = 'block'">Register</button>
         <label>
           <input type="checkbox" checked="checked" name="remember"> Remember me
         </label>
@@ -169,6 +171,23 @@
       </div>
     </form>
   </div>
+
+  <div class="regform animate">
+    <form class="reg-wrap">
+      <div class="regcontainer">
+        <h4 style="text-align: center">Register</h4>
+        <hr>
+        <input class="fname" type="text" placeholder="First Name">
+        <input class="lname" type="text" placeholder="Last Name">
+        <input class="ID" type="text" placeholder="Student ID">
+        <input class="email" type="text" placeholder="Email">
+        <input class="password" type="password" placeholder="Password">
+        <hr>
+        <button>Submit</button>
+      </div>
+    </form>
+  </div>
+
 
   <!-- BUTTON TO TOP -->
 
