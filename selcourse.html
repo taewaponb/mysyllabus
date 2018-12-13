@@ -21,9 +21,13 @@
     <link rel="shortcut icon" href="image/MYS.ico" />
     <link href="css/login.css" rel="stylesheet">
     <link href="css/course.css" rel="stylesheet">
+    <link href="css/loader.css" rel="stylesheet">
 </head>
 
-<body back>
+<body onload="myFunction()" style="margin:0;">
+
+    <div id="loader"></div>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand " href="index.html">My Syllabus</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -60,27 +64,26 @@
         </div>
     </nav>
 
-    <div id="loginmodal" class="modal">
+    <div style="display:none;" id="myDiv" class="animate-bottom">
+        <!-- LOGIN -->
+        <div id="loginmodal" class="modal">
+            <form class="modal-content animate" action="/action_page.php">
+                <div class="container">
+                    <input type="text" placeholder="Username" name="uname" required>
+                    <input type="password" placeholder="Password" name="psw" required>
+                    <button type="submit">Login</button>
+                    <label>
+                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                    </label>
+                </div>
 
-        <form class="modal-content animate" action="/action_page.php">
+                <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="document.getElementById('loginmodal').style.display='none'" class="cancelbtn">Cancel</button>
+                    <span class="psw"> <a href="#">Forgot password?</a></span>
+                </div>
+            </form>
+        </div>
 
-            <div class="container">
-                <input type="text" placeholder="Username" name="uname" required>
-                <input type="password" placeholder="Password" name="psw" required>
-                <button type="submit">Login</button>
-                <label>
-                    <input type="checkbox" checked="checked" name="remember"> Remember me
-                </label>
-            </div>
-
-            <div class="container" style="background-color:#f1f1f1">
-                <button type="button" onclick="document.getElementById('loginmodal').style.display='none'" class="cancelbtn">Cancel</button>
-                <span class="psw"> <a href="#">Forgot password?</a></span>
-            </div>
-        </form>
-    </div>
-
-    <main role="main">
         <section class="jumbotron text-center">
             <div class="container">
                 <h1 class="jumbotron-heading">SELECTIVE COURSE</h1>
@@ -94,7 +97,6 @@
         <div class="album py-5 bg-light">
             <h1 class="text-center jumbotron-heading"></h1>
             <div class="container" id="stage">
-
             </div>
         </div>
 
@@ -104,47 +106,58 @@
             <p>Create by <a href="https://www.facebook.com/surawit.wiriyasrisuwatthana.7">K A K D E N</a></p>
             <p>Thanks to <a href="https://getbootstrap.com/">Bootstrap</a></p>
         </footer>
-    </main>
+    </div>
+</body>
 
-    <script>
-        // When the user clicks anywhere outside of the modal, close it
-        var modal = document.getElementById('loginmodal');
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+<script>
+    // When the user clicks anywhere outside of the modal, close it
+    var modal = document.getElementById('loginmodal');
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
         }
+    }
 
-        $(document).ready(function () {
-            $("body").ready(function (event) {
-                $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus.json', function (jd, index) {
-                    var result = '<div class="row">';
-                    var j = jd['selCourse'];
-                    console.log(jd);
-                    for (i = 0; i < j.length; i++) {
-                        result += '<div class="col-md-4">'
-                            + '<div class="card mb-4 shadow-sm">'
-                            + '<div class="card-body">'
-                            + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
-                            + '<p class="card-text text-center">' + j[i].thName + '</p>'
-                            + '<div class="d-flex justify-content-between align-items-center">'
-                            + '<div class="btn-group">'
-                            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
-                            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
-                            + "</div>"
-                            + '<strong class="text-primary">' + j[i].id + '</strong>'
-                            + "</div>"
-                            + "</div>"
-                            + "</div>"
-                            + "</div>";
-                    }
-                    result += '</div>';
-                    $('#stage').html(result);
-                });
+    $(document).ready(function () {
+        $("body").ready(function (event) {
+            $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus.json', function (jd, index) {
+                var result = '<div class="row">';
+                var j = jd['selCourse'];
+                console.log(jd);
+                for (i = 0; i < j.length; i++) {
+                    result += '<div class="col-md-4">'
+                        + '<div class="card mb-4 shadow-sm">'
+                        + '<div class="card-body">'
+                        + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
+                        + '<p class="card-text text-center">' + j[i].thName + '</p>'
+                        + '<div class="d-flex justify-content-between align-items-center">'
+                        + '<div class="btn-group">'
+                        + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
+                        + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
+                        + "</div>"
+                        + '<strong class="text-primary">' + j[i].id + '</strong>'
+                        + "</div>"
+                        + "</div>"
+                        + "</div>"
+                        + "</div>";
+                }
+                result += '</div>';
+                $('#stage').html(result);
             });
         });
+    });
 
-    </script>
-</body>
+</script>
+
+<script>
+    var time;
+    function myFunction() {
+        time = setTimeout(showPage, 500);
+    }
+    function showPage() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
+    }
+</script>
 
 </html>

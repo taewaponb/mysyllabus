@@ -21,9 +21,13 @@
   <link rel="shortcut icon" href="image/MYS.ico" />
   <link href="css/login.css" rel="stylesheet">
   <link href="css/course.css" rel="stylesheet">
+  <link href="css/loader.css" rel="stylesheet">
 </head>
 
-<body>
+<body onload="myFunction()" style="margin:0;">
+
+  <div id="loader"></div>
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand " href="index.html">My Syllabus</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -60,10 +64,10 @@
     </div>
   </nav>
 
+  <div style="display:none;" id="myDiv" class="animate-bottom">
+  <!-- LOGIN -->
   <div id="loginmodal" class="modal">
-
     <form class="modal-content animate" action="/action_page.php">
-
       <div class="container">
         <input type="text" placeholder="Username" name="uname" required>
         <input type="password" placeholder="Password" name="psw" required>
@@ -80,7 +84,6 @@
     </form>
   </div>
 
-  <main role="main">
     <section class="jumbotron text-center">
       <div class="container">
         <h1 class="jumbotron-heading">MAIN COURSE</h1>
@@ -139,9 +142,10 @@
       <p>Create by <a href="https://www.facebook.com/surawit.wiriyasrisuwatthana.7">K A K D E N</a></p>
       <p>Thanks to <a href="https://getbootstrap.com/">Bootstrap</a></p>
     </footer>
-  </main>
+  </div>
+</body>
 
-  <script>
+<script>
     // When the user clicks anywhere outside of the modal, close it
     var modal = document.getElementById('loginmodal');
     window.onclick = function (event) {
@@ -329,10 +333,17 @@
             });
         });
     });
-
-
-
   </script>
-</body>
+
+<script>
+    var time;
+    function myFunction() {
+      time = setTimeout(showPage, 500);
+    }
+    function showPage() {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("myDiv").style.display = "block";
+    }
+    </script>
 
 </html>
