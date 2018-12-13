@@ -1,4 +1,5 @@
-/* Full-width input fields */
+@import url('https://fonts.googleapis.com/css?family=Athiti|Prompt|Sarabun');
+
 input[type=text], input[type=password] {
   width: 100%;
   padding: 12px 20px;

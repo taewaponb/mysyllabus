@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Athiti|Prompt|Sarabun');
+
+body {
+  font-family: 'Prompt', sans-serif;
+}
+
 :root {
   --jumbotron-padding-y: 3rem;
 }

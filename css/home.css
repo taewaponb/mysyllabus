@@ -1,15 +1,12 @@
-/* GLOBAL STYLES
--------------------------------------------------- */
-/* Padding below the footer and lighter body text */
+@import url('https://fonts.googleapis.com/css?family=Athiti|Prompt|Sarabun');
 
 body {
   color: #5a5a5a;
+  font-family: 'Prompt', sans-serif;
 }
-
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
-
 /* Carousel base class */
 .carousel {
   margin-bottom: 4rem;
