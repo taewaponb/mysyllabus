@@ -93,10 +93,8 @@
 
     <div class="album py-5 bg-light">
       <h1 class="text-center jumbotron-heading"></h1>
-      <div class="container">
-        <div class="row" id="stage">
-
-        </div>
+      <div class="container" id="stage">
+        
       </div>
     </div>
     
@@ -120,11 +118,12 @@
  $(document).ready(function () {
         $("body").ready(function (event) {
             $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus.json', function (jd, index) {
-             var result = '<div class="col-md-4">' ;
+             var result = '<div class="row">' ;
                 var j = jd['selCourse'];
                 console.log(jd);
                 for (i = 0; i < j.length; i++) {
-                    result += '<div class="card mb-4 shadow-sm">'
+                    result += '<div class="col-md-4">'
+                    + '<div class="card mb-4 shadow-sm">'
                     + '<div class="card-body">'
                     + '<div class="card-text text-center">' + '<strong>'+ j[i].enName + '</strong>' + '</div>'
                     + '<p class="card-text text-center">' + j[i].thName + '</p>'
@@ -139,6 +138,7 @@
                     + "</div>"
                     + "</div>";
                 }
+                result += '</div>';
                 $('#stage').html(result);
             });
         });
