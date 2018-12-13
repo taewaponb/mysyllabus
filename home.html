@@ -156,24 +156,23 @@
   <div id="loginmodal" class="modal">
     <form class="modal-content animate">
       <div class="container">
+        <h4 style="text-align: center">Login</h4>
+        <hr>
         <input type="text" placeholder="Email">
         <input type="password" placeholder="Password">
         <button type="submit">Login</button>
         <hr>
-        <button onclick="document.querySelector('.regform').style.display = 'block'">Register</button>
-        <label>
-          <input type="checkbox" checked="checked" name="remember"> Remember me
-        </label>
+        <button type="button" onclick="document.getElementById('regismodal').style.display = 'block'">Register</button>
       </div>
       <div class="container" style="background-color:#f1f1f1">
         <button type="button" onclick="document.getElementById('loginmodal').style.display='none'" class="cancelbtn">Cancel</button>
-        <span class="psw"> <a href="#">Forgot password?</a></span>
       </div>
     </form>
   </div>
 
-  <div class="regform animate">
-    <form class="reg-wrap">
+  <!-- REGISTER -->
+  <div id="regismodal" class="regform">
+    <form class="reg-wrap animate">
       <div class="regcontainer">
         <h4 style="text-align: center">Register</h4>
         <hr>
@@ -203,9 +202,11 @@
   <script>
     // When the user clicks anywhere outside of the modal, close it
     var modal = document.getElementById('loginmodal');
+    var regismodal = document.getElementById('regismodal')
     window.onclick = function (event) {
-      if (event.target == modal) {
+      if (event.target == modal || event.target == regismodal) {
         modal.style.display = "none";
+        regismodal.style.display = "none";
       }
     }
   </script>
