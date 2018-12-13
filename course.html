@@ -66,6 +66,9 @@
 
   <div style="display:none;" id="myDiv" class="animate-bottom">
 
+      <div id="myview"></div>
+      <div id="mycomment"></div>
+
     <!-- LOGIN -->
     <div id="loginmodal" class="modal">
       <form class="modal-content animate" action="/action_page.php">
@@ -149,26 +152,29 @@
     $("body").ready(function (event) {
       $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
         var result = '<div class="row">';
-        var j = jd['Y1S1'];
-        console.log(jd);
-        for (i = 0; i < j.length; i++) {
-          result += '<div class="col-md-4">'
-            + '<div class="card mb-4 shadow-sm">'
-            + '<div class="card-body">'
-            + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
-            + '<p class="card-text text-center">' + j[i].thName + '</p>'
-            + '<div class="d-flex justify-content-between align-items-center">'
-            + '<div class="btn-group">'
-            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
-            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
-            + "</div>"
-            + '<strong class="text-primary">' + j[i].id + '</strong>'
-            + "</div>"
-            + "</div>"
-            + "</div>"
-            + "</div>";
+                var viewresult = '<div>';
+                var viewcomment = '<div>';
+                var j = jd['Y1S1'];
+                for (i = 0; i < j.length; i++) {
+                    result += '<div class="col-md-4">'
+                        + '<div class="card mb-4 shadow-sm">'
+                        + '<div class="card-body">'
+                        + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
+                        + '<p class="card-text text-center">' + j[i].thName + '</p>'
+                        + '<div class="d-flex justify-content-between align-items-center">'
+                        + '<div class="btn-group">'
+                        + '<button id="' + "viewbtn" + i + '" type="button" class="btn btn-sm btn-outline-secondary" onclick="document.getElementById('
+                        + "'view" + i + "'" + ').style.display=' + "'block'" + '">' + "View" + '</button>'
+                        + '<button id="' + "cmbtn" + i + '" type="button" class="btn btn-sm btn-outline-secondary" onclick="fbcomment(),document.getElementById('
+                        + "'comment" + i + "'" + ').style.display=' + "'block'" + '">' + "Comment" + '</button>'
+                        + "</div>"
+                        + '<strong class="text-primary">' + j[i].id + '</strong>'
+                        + "</div>"
+                        + "</div>"
+                        + "</div>"
+                        + "</div>";
 
-            viewresult += '<div id="view' + i + '" class="modal">'
+                    viewresult += '<div id="view' + i + '" class="modal">'
                         + '<div class="modal-content animate">'
                         + '<div class="modal-header">'
                         + '<h5 class="modal-title ">Selective Course</h5>'
@@ -193,7 +199,7 @@
                         + '</div>'
                         + '</div>'
 
-                    viewcomment += '<div id="comment' + i + '" class="modal">'
+                        viewcomment += '<div id="comment' + i + '" class="modal">'
                         + '<div class="modal-content animate">'
                         + '<div class="modal-header">'
                         + '<h5 class="modal-title ">Facebook Comment</h5>'
@@ -214,9 +220,10 @@
                 }
                 result += '</div>';
                 viewresult += '</div>';
-        $('#y1s1').html(result);
-        $('#myview').html(viewresult);
-        $('#mycomment').html(viewcomment);
+                viewcomment += '</div>';
+                $('#y1s1').html(result);
+                $('#myview').html(viewresult);
+                $('#mycomment').html(viewcomment);
       });
     });
   });
