@@ -18,10 +18,12 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="shortcut icon" href="image/MYS.ico" />
     <link href="css/login.css" rel="stylesheet">
     <link href="css/course.css" rel="stylesheet">
     <link href="css/loader.css" rel="stylesheet">
+    <link href="css/view.css" rel="stylesheet">
 </head>
 
 <body onload="myFunction()" style="margin:0;">
@@ -52,7 +54,7 @@
                         P3TCHZ
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">My Course</a>
+                        <a class="dropdown-item" href="mycourse.html">My Course</a>
                         <a class="dropdown-item" href="#">Logout</a>
                     </div>
                 </li>
@@ -76,7 +78,6 @@
                         <input type="checkbox" checked="checked" name="remember"> Remember me
                     </label>
                 </div>
-
                 <div class="container" style="background-color:#f1f1f1">
                     <button type="button" onclick="document.getElementById('loginmodal').style.display='none'" class="cancelbtn">Cancel</button>
                     <span class="psw"> <a href="#">Forgot password?</a></span>
@@ -100,6 +101,21 @@
             </div>
         </div>
 
+        <!--  VIEW MODAL -->
+        <div id="view" class="w3-modal">
+                <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+                  <div class="w3-center"><br>
+                    <span onclick="document.getElementById('view').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                  </div>
+                  <form class="w3-container" action="/action_page.php">
+                    <div class="w3-section">
+                      <label><b>Username</b></label><br>
+                      <label><b>Password</b></label>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
 
         <footer class="container">
             <p class="float-right"><a href="#">Back to top</a></p>
@@ -112,9 +128,12 @@
 <script>
     // When the user clicks anywhere outside of the modal, close it
     var modal = document.getElementById('loginmodal');
+    var modalV = document.getElementById('view');
     window.onclick = function (event) {
-        if (event.target == modal) {
+        if (event.target == modal ) {
             modal.style.display = "none";
+        } else if  (event.target == modalV) {
+            mondalV.style.display = "none";
         }
     }
 
@@ -132,7 +151,7 @@
                         + '<p class="card-text text-center">' + j[i].thName + '</p>'
                         + '<div class="d-flex justify-content-between align-items-center">'
                         + '<div class="btn-group">'
-                        + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
+                        + '<button type="button" class="btn btn-sm btn-outline-secondary" onclick="document.getElementById(' + "'view'" + ').style.display=' + "'block'" + '">' + "View" + '</button>'
                         + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
                         + "</div>"
                         + '<strong class="text-primary">' + j[i].id + '</strong>'
@@ -140,6 +159,7 @@
                         + "</div>"
                         + "</div>"
                         + "</div>";
+
                 }
                 result += '</div>';
                 $('#stage').html(result);

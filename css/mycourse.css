@@ -7,11 +7,10 @@ figcaption {
 html {
     background-color: #333;
     width: 100%;
-
 }
 
 .carousel-inner {
-    margin-left: 7.3%;
+    margin-left: 3%;
 }
 
 #carousel-c1, #carousel-c2 {
@@ -22,8 +21,7 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    font-family: "Open Sans", Helvetica, Arial, sans-serif;
-    font-size: 5px;
+    font-family: 'Prompt', sans-serif;
     color: #ffffff;
     width: 100%;
     background-color: #333;
