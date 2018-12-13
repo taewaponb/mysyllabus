@@ -76,13 +76,15 @@
                     <button class="allbutton btn-success" type="submit">Login</button>
                 </div>
                 <div class="container" style="background-color:#f1f1f1">
-                        <button type="button" class="btn btn-danger" onclick="document.getElementById('loginmodal').style.display='none'">Cancel</button>
+                    <button type="button" class="btn btn-danger" onclick="document.getElementById('loginmodal').style.display='none'">Cancel</button>
                     <span class="psw"> <a href="#">Create account</a></span>
                 </div>
             </form>
         </div>
 
     </div>
+
+
 
     <section class="jumbotron text-center">
         <div class="container">
@@ -96,8 +98,10 @@
 
     <div class="album py-5 bg-light">
         <h1 class="text-center jumbotron-heading"></h1>
-        <div class="container" id="stage">
+        <div class="container" id="selcourse">
         </div>
+        <div id="myview"></div>
+        <div id="mycomment"></div>
     </div>
 
     <footer class="container">
@@ -109,21 +113,13 @@
 </body>
 
 <script>
-    // When the user clicks anywhere outside of the modal, close it
-    var modal = document.getElementById('view');
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-
     $(document).ready(function () {
         $("body").ready(function (event) {
             $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus.json', function (jd, index) {
                 var result = '<div class="row">';
-                var viewresult = '<div id="view" class="modal">';
+                var viewresult = '<div>';
+                var viewcomment = '<div>';
                 var j = jd['selCourse'];
-                console.log(jd);
                 for (i = 0; i < j.length; i++) {
                     result += '<div class="col-md-4">'
                         + '<div class="card mb-4 shadow-sm">'
@@ -132,8 +128,10 @@
                         + '<p class="card-text text-center">' + j[i].thName + '</p>'
                         + '<div class="d-flex justify-content-between align-items-center">'
                         + '<div class="btn-group">'
-                        + '<button type="button" class="btn btn-sm btn-outline-secondary" onclick="document.getElementById(' + "'view'" + ').style.display=' + "'block'" + '">' + "View" + '</button>'
-                        + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
+                        + '<button id="' + "viewbtn" + i + '" type="button" class="btn btn-sm btn-outline-secondary" onclick="document.getElementById('
+                        + "'view" + i + "'" + ').style.display=' + "'block'" + '">' + "View" + '</button>'
+                        + '<button id="' + "cmbtn" + i + '" type="button" class="btn btn-sm btn-outline-secondary" onclick="fbcomment(),document.getElementById('
+                        + "'comment" + i + "'" + ').style.display=' + "'block'" + '">' + "Comment" + '</button>'
                         + "</div>"
                         + '<strong class="text-primary">' + j[i].id + '</strong>'
                         + "</div>"
@@ -141,35 +139,72 @@
                         + "</div>"
                         + "</div>";
 
-                    viewresult += '<div class="modal-content animate">'
-                            + '<div class="modal-header">'
-                            + '<h5 class="modal-title">Selective Course</h5>'
-                            + '<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="document.getElementById(' + "'view'" + ').style.display=' + "'none'" + '">'
-                            + '<span aria-hidden="true">&times;</span>'
-                            + '</button>'
-                            + '</div>'
-                            + '<div class="modal-body">'
-                            + '<h5><b>' + j[i].enName + '</b></h5>'
-                            + '<p>' + j[i].thName + '</p>'
-                            + '<h6>' + j[i].id + '</h6>'
-                            + '<p>' + j[i].credit + '</p>'
-                            + '<hr>'
-                            + '<p><b>'+ j[i].enDesc +'</b></p>'
-                            + '<p>' + j[i].thDesc + '</p>'
-                            + '</div>'
-                            + '<div class="modal-footer">'
-                            + '<button type="button" class="btn btn-secondary" onclick="document.getElementById(' + "'view'" + ').style.display=' + "'none'" + '">Close</button>'
-                            + '</div>'
-                            + '</div>'
+                    viewresult += '<div id="view' + i + '" class="modal">'
+                        + '<div class="modal-content animate">'
+                        + '<div class="modal-header">'
+                        + '<h5 class="modal-title ">Selective Course</h5>'
+                        + '<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="document.getElementById('
+                        + "'view" + i + "'" + ').style.display=' + "'none'" + '">'
+                        + '<span aria-hidden="true">&times;</span>'
+                        + '</button>'
+                        + '</div>'
+                        + '<div class="modal-body">'
+                        + '<h5 class="modal-title text-primary "><b>' + j[i].enName + '</b></h5>'
+                        + '<p>' + j[i].thName + '</p>'
+                        + '<h6>' + "รหัสวิชา: " + j[i].id + '</h6>'
+                        + '<p>' + "หน่วยกิต: " + j[i].credit + '</p>'
+                        + '<hr>'
+                        + '<p><b>' + j[i].enDesc + '</b></p>'
+                        + '<p>' + j[i].thDesc + '</p>'
+                        + '</div>'
+                        + '<div class="modal-footer">'
+                        + '<button type="button" class="btn btn-danger" onclick="document.getElementById('
+                        + "'view" + i + "'" + ').style.display=' + "'none'" + '">Close</button>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>'
+
+                    viewcomment += '<div id="comment' + i + '" class="modal">'
+                        + '<div class="modal-content animate">'
+                        + '<div class="modal-header">'
+                        + '<h5 class="modal-title ">Facebook Comment</h5>'
+                        + '<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="document.getElementById('
+                        + "'comment" + i + "'" + ').style.display=' + "'none'" + '">'
+                        + '<span aria-hidden="true">&times;</span>'
+                        + '</button>'
+                        + '</div>'
+                        + '<div class="modal-body">'
+                        + '<p class="fb-comments" data-href="' + 4848 + i + '" data-width="100%" data-numposts="5"></p>'
+                        + '</div>'
+                        + '<div class="modal-footer">'
+                        + '<button type="button" class="btn btn-danger" onclick="document.getElementById('
+                        + "'comment" + i + "'" + ').style.display=' + "'none'" + '">Close</button>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>'
                 }
                 result += '</div>';
                 viewresult += '</div>';
-                $('#stage').html(result);
-                $('#myDiv').html(viewresult);
+                viewcomment += '</div>';
+                $('#selcourse').html(result);
+                $('#myview').html(viewresult);
+                $('#mycomment').html(viewcomment);
             });
         });
     });
 
+</script>
+
+<script>
+    function fbcomment() {
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2&appId=2240591592844450&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    }
 </script>
 
 <script>

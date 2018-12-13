@@ -21,6 +21,7 @@
         <link rel="shortcut icon" href="image/MYS.ico" />
         <link href="css/login.css" rel="stylesheet">
         <link href="css/news.css" rel="stylesheet">
+        <link href="css/loader.css" rel="stylesheet">    
 </head>
 
 <body onload="myFunction()" style="margin:0;">
@@ -187,7 +188,7 @@
                     <p>Thanks to <a href="https://getbootstrap.com/">Bootstrap</a></p>
                 </footer>
         </div>
-        </div>
+    </div>
 </body>
 
 <script>
@@ -290,14 +291,6 @@
             });
         });
     });
-
-    // When the user clicks anywhere outside of the modal, close it
-    var modal = document.getElementById('loginmodal');
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
 
     var time;
     function myFunction() {
