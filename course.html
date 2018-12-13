@@ -15,6 +15,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/fbcomment.js"></script>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
@@ -22,6 +23,7 @@
   <link href="css/login.css" rel="stylesheet">
   <link href="css/course.css" rel="stylesheet">
   <link href="css/loader.css" rel="stylesheet">
+
 </head>
 
 <body onload="myFunction()" style="margin:0;">
@@ -68,21 +70,31 @@
 
       <div id="myview"></div>
       <div id="mycomment"></div>
+      <div id="myview2"></div>
+      <div id="mycomment2"></div>
+      <div id="myview3"></div>
+      <div id="mycomment3"></div>
+      <div id="myview4"></div>
+      <div id="mycomment4"></div>
+      <div id="myview5"></div>
+      <div id="mycomment5"></div>
+      <div id="myview6"></div>
+      <div id="mycomment6"></div>
 
     <!-- LOGIN -->
     <div id="loginmodal" class="modal">
-      <form class="modal-content animate" action="/action_page.php">
-        <div class="container">
-          <h4 style="text-align: center">Login</h4>
-          <input type="text" placeholder="Email" name="mail" required>
-          <input type="password" placeholder="Password" name="psw" required>
-          <button class="allbutton btn-success" type="submit">Login</button>
-        </div>
-        <div class="container" style="background-color:#f1f1f1">
-          <button type="button" class="btn btn-danger" onclick="document.getElementById('loginmodal').style.display='none'">Cancel</button>
-          <span class="psw"> <a href="#">Create account</a></span>
-        </div>
-      </form>
+        <form class="modal-content-login animate" action="/action_page.php">
+            <div class="container">
+                <h4 style="text-align: center">Login</h4>
+                <input type="text" placeholder="Email" name="mail" required>
+                <input type="password" placeholder="Password" name="psw" required>
+                <button class="allbutton btn-success" type="submit">Login</button>
+            </div>
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" class="btn btn-danger" onclick="document.getElementById('loginmodal').style.display='none'">Cancel</button>
+                <span class="psw"> <a href="#">Create account</a></span>
+            </div>
+        </form>
     </div>
 
     <section class="jumbotron text-center">
@@ -153,7 +165,6 @@
       $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
         var result = '<div class="row">';
                 var viewresult = '<div>';
-                var viewcomment = '<div>';
                 var j = jd['Y1S1'];
                 for (i = 0; i < j.length; i++) {
                     result += '<div class="col-md-4">'
@@ -163,21 +174,19 @@
                         + '<p class="card-text text-center">' + j[i].thName + '</p>'
                         + '<div class="d-flex justify-content-between align-items-center">'
                         + '<div class="btn-group">'
-                        + '<button id="' + "viewbtn" + i + '" type="button" class="btn btn-sm btn-outline-secondary" onclick="document.getElementById('
+                        + '<button id="' + "viewbtn" + i + '" type="button" class="btn btn-sm btn-outline-secondary" onclick="fbcomment(),document.getElementById('
                         + "'view" + i + "'" + ').style.display=' + "'block'" + '">' + "View" + '</button>'
-                        + '<button id="' + "cmbtn" + i + '" type="button" class="btn btn-sm btn-outline-secondary" onclick="fbcomment(),document.getElementById('
-                        + "'comment" + i + "'" + ').style.display=' + "'block'" + '">' + "Comment" + '</button>'
                         + "</div>"
                         + '<strong class="text-primary">' + j[i].id + '</strong>'
                         + "</div>"
                         + "</div>"
                         + "</div>"
-                        + "</div>";
+                        + "</div>"
 
                     viewresult += '<div id="view' + i + '" class="modal">'
                         + '<div class="modal-content animate">'
                         + '<div class="modal-header">'
-                        + '<h5 class="modal-title ">Selective Course</h5>'
+                        + '<h5 class="modal-title ">Main Course</h5>'
                         + '<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="document.getElementById('
                         + "'view" + i + "'" + ').style.display=' + "'none'" + '">'
                         + '<span aria-hidden="true">&times;</span>'
@@ -191,6 +200,7 @@
                         + '<hr>'
                         + '<p><b>' + j[i].enDesc + '</b></p>'
                         + '<p>' + j[i].thDesc + '</p>'
+                        + '<p class="fb-comments" data-href="' + 1000 + i + '" data-width="100%" data-numposts="5"></p>'
                         + '</div>'
                         + '<div class="modal-footer">'
                         + '<button type="button" class="btn btn-danger" onclick="document.getElementById('
@@ -198,32 +208,11 @@
                         + '</div>'
                         + '</div>'
                         + '</div>'
-
-                        viewcomment += '<div id="comment' + i + '" class="modal">'
-                        + '<div class="modal-content animate">'
-                        + '<div class="modal-header">'
-                        + '<h5 class="modal-title ">Facebook Comment</h5>'
-                        + '<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="document.getElementById('
-                        + "'comment" + i + "'" + ').style.display=' + "'none'" + '">'
-                        + '<span aria-hidden="true">&times;</span>'
-                        + '</button>'
-                        + '</div>'
-                        + '<div class="modal-body">'
-                        + '<p class="fb-comments" data-href="' + 4848 + i + '" data-width="100%" data-numposts="5"></p>'
-                        + '</div>'
-                        + '<div class="modal-footer">'
-                        + '<button type="button" class="btn btn-danger" onclick="document.getElementById('
-                        + "'comment" + i + "'" + ').style.display=' + "'none'" + '">Close</button>'
-                        + '</div>'
-                        + '</div>'
-                        + '</div>'
                 }
                 result += '</div>';
                 viewresult += '</div>';
-                viewcomment += '</div>';
                 $('#y1s1').html(result);
                 $('#myview').html(viewresult);
-                $('#mycomment').html(viewcomment);
       });
     });
   });
@@ -233,27 +222,55 @@
     $("body").ready(function (event) {
       $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
         var result = '<div class="row">';
-        var j = jd['Y1S2'];
-        console.log(jd);
-        for (i = 0; i < j.length; i++) {
-          result += '<div class="col-md-4">'
-            + '<div class="card mb-4 shadow-sm">'
-            + '<div class="card-body">'
-            + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
-            + '<p class="card-text text-center">' + j[i].thName + '</p>'
-            + '<div class="d-flex justify-content-between align-items-center">'
-            + '<div class="btn-group">'
-            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
-            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
-            + "</div>"
-            + '<strong class="text-primary">' + j[i].id + '</strong>'
-            + "</div>"
-            + "</div>"
-            + "</div>"
-            + "</div>";
-        }
-        result += '</div>';
-        $('#y1s2').html(result);
+                var viewresult = '<div>';
+                var j = jd['Y1S2'];
+                for (i = 0; i < j.length; i++) {
+                    result += '<div class="col-md-4">'
+                        + '<div class="card mb-4 shadow-sm">'
+                        + '<div class="card-body">'
+                        + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
+                        + '<p class="card-text text-center">' + j[i].thName + '</p>'
+                        + '<div class="d-flex justify-content-between align-items-center">'
+                        + '<div class="btn-group">'
+                        + '<button id="' + "viewbtnA" + i + '" type="button" class="btn btn-sm btn-outline-secondary" onclick="fbcomment(),document.getElementById('
+                        + "'viewA" + i + "'" + ').style.display=' + "'block'" + '">' + "View" + '</button>'
+                        + "</div>"
+                        + '<strong class="text-primary">' + j[i].id + '</strong>'
+                        + "</div>"
+                        + "</div>"
+                        + "</div>"
+                        + "</div>"
+
+                    viewresult += '<div id="viewA' + i + '" class="modal">'
+                        + '<div class="modal-content animate">'
+                        + '<div class="modal-header">'
+                        + '<h5 class="modal-title ">Main Course</h5>'
+                        + '<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="document.getElementById('
+                        + "'viewA" + i + "'" + ').style.display=' + "'none'" + '">'
+                        + '<span aria-hidden="true">&times;</span>'
+                        + '</button>'
+                        + '</div>'
+                        + '<div class="modal-body">'
+                        + '<h5 class="modal-title text-primary "><b>' + j[i].enName + '</b></h5>'
+                        + '<p>' + j[i].thName + '</p>'
+                        + '<h6>' + "รหัสวิชา: " + j[i].id + '</h6>'
+                        + '<p>' + "หน่วยกิต: " + j[i].credit + '</p>'
+                        + '<hr>'
+                        + '<p><b>' + j[i].enDesc + '</b></p>'
+                        + '<p>' + j[i].thDesc + '</p>'
+                        + '<p class="fb-comments" data-href="' + 1000 + i + '" data-width="100%" data-numposts="5"></p>'
+                        + '</div>'
+                        + '<div class="modal-footer">'
+                        + '<button type="button" class="btn btn-danger" onclick="document.getElementById('
+                        + "'viewA" + i + "'" + ').style.display=' + "'none'" + '">Close</button>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>'
+                }
+                result += '</div>';
+                viewresult += '</div>';
+                $('#y1s2').html(result);
+                $('#myview2').html(viewresult);
       });
     });
   });
@@ -263,57 +280,114 @@
     $("body").ready(function (event) {
       $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
         var result = '<div class="row">';
-        var j = jd['Y2S1'];
-        console.log(jd);
-        for (i = 0; i < j.length; i++) {
-          result += '<div class="col-md-4">'
-            + '<div class="card mb-4 shadow-sm">'
-            + '<div class="card-body">'
-            + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
-            + '<p class="card-text text-center">' + j[i].thName + '</p>'
-            + '<div class="d-flex justify-content-between align-items-center">'
-            + '<div class="btn-group">'
-            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
-            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
-            + "</div>"
-            + '<strong class="text-primary">' + j[i].id + '</strong>'
-            + "</div>"
-            + "</div>"
-            + "</div>"
-            + "</div>";
-        }
-        result += '</div>';
-        $('#y2s1').html(result);
+                var viewresult = '<div>';
+                var j = jd['Y2S1'];
+                for (i = 0; i < j.length; i++) {
+                    result += '<div class="col-md-4">'
+                        + '<div class="card mb-4 shadow-sm">'
+                        + '<div class="card-body">'
+                        + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
+                        + '<p class="card-text text-center">' + j[i].thName + '</p>'
+                        + '<div class="d-flex justify-content-between align-items-center">'
+                        + '<div class="btn-group">'
+                        + '<button id="' + "viewbtnB" + i + '" type="button" class="btn btn-sm btn-outline-secondary" onclick="fbcomment(),document.getElementById('
+                        + "'viewB" + i + "'" + ').style.display=' + "'block'" + '">' + "View" + '</button>'
+                        + "</div>"
+                        + '<strong class="text-primary">' + j[i].id + '</strong>'
+                        + "</div>"
+                        + "</div>"
+                        + "</div>"
+                        + "</div>"
+
+                    viewresult += '<div id="viewB' + i + '" class="modal">'
+                        + '<div class="modal-content animate">'
+                        + '<div class="modal-header">'
+                        + '<h5 class="modal-title ">Main Course</h5>'
+                        + '<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="document.getElementById('
+                        + "'viewB" + i + "'" + ').style.display=' + "'none'" + '">'
+                        + '<span aria-hidden="true">&times;</span>'
+                        + '</button>'
+                        + '</div>'
+                        + '<div class="modal-body">'
+                        + '<h5 class="modal-title text-primary "><b>' + j[i].enName + '</b></h5>'
+                        + '<p>' + j[i].thName + '</p>'
+                        + '<h6>' + "รหัสวิชา: " + j[i].id + '</h6>'
+                        + '<p>' + "หน่วยกิต: " + j[i].credit + '</p>'
+                        + '<hr>'
+                        + '<p><b>' + j[i].enDesc + '</b></p>'
+                        + '<p>' + j[i].thDesc + '</p>'
+                        + '<p class="fb-comments" data-href="' + 2000 + i + '" data-width="100%" data-numposts="5"></p>'
+                        + '</div>'
+                        + '<div class="modal-footer">'
+                        + '<button type="button" class="btn btn-danger" onclick="document.getElementById('
+                        + "'viewB" + i + "'" + ').style.display=' + "'none'" + '">Close</button>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>'
+                }
+                result += '</div>';
+                viewresult += '</div>';
+                $('#y2s1').html(result);
+                $('#myview3').html(viewresult);
       });
     });
   });
+
 
   // 2st YEAR 2 SEMESTER
   $(document).ready(function () {
     $("body").ready(function (event) {
       $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
         var result = '<div class="row">';
-        var j = jd['Y2S2'];
-        console.log(jd);
-        for (i = 0; i < j.length; i++) {
-          result += '<div class="col-md-4">'
-            + '<div class="card mb-4 shadow-sm">'
-            + '<div class="card-body">'
-            + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
-            + '<p class="card-text text-center">' + j[i].thName + '</p>'
-            + '<div class="d-flex justify-content-between align-items-center">'
-            + '<div class="btn-group">'
-            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
-            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
-            + "</div>"
-            + '<strong class="text-primary">' + j[i].id + '</strong>'
-            + "</div>"
-            + "</div>"
-            + "</div>"
-            + "</div>";
-        }
-        result += '</div>';
-        $('#y2s2').html(result);
+                var viewresult = '<div>';
+                var j = jd['Y2S2'];
+                for (i = 0; i < j.length; i++) {
+                    result += '<div class="col-md-4">'
+                        + '<div class="card mb-4 shadow-sm">'
+                        + '<div class="card-body">'
+                        + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
+                        + '<p class="card-text text-center">' + j[i].thName + '</p>'
+                        + '<div class="d-flex justify-content-between align-items-center">'
+                        + '<div class="btn-group">'
+                        + '<button id="' + "viewbtnC" + i + '" type="button" class="btn btn-sm btn-outline-secondary" onclick="fbcomment(),document.getElementById('
+                        + "'viewC" + i + "'" + ').style.display=' + "'block'" + '">' + "View" + '</button>'
+                        + "</div>"
+                        + '<strong class="text-primary">' + j[i].id + '</strong>'
+                        + "</div>"
+                        + "</div>"
+                        + "</div>"
+                        + "</div>"
+
+                    viewresult += '<div id="viewC' + i + '" class="modal">'
+                        + '<div class="modal-content animate">'
+                        + '<div class="modal-header">'
+                        + '<h5 class="modal-title ">Main Course</h5>'
+                        + '<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="document.getElementById('
+                        + "'viewC" + i + "'" + ').style.display=' + "'none'" + '">'
+                        + '<span aria-hidden="true">&times;</span>'
+                        + '</button>'
+                        + '</div>'
+                        + '<div class="modal-body">'
+                        + '<h5 class="modal-title text-primary "><b>' + j[i].enName + '</b></h5>'
+                        + '<p>' + j[i].thName + '</p>'
+                        + '<h6>' + "รหัสวิชา: " + j[i].id + '</h6>'
+                        + '<p>' + "หน่วยกิต: " + j[i].credit + '</p>'
+                        + '<hr>'
+                        + '<p><b>' + j[i].enDesc + '</b></p>'
+                        + '<p>' + j[i].thDesc + '</p>'
+                        + '<p class="fb-comments" data-href="' + 3000 + i + '" data-width="100%" data-numposts="5"></p>'
+                        + '</div>'
+                        + '<div class="modal-footer">'
+                        + '<button type="button" class="btn btn-danger" onclick="document.getElementById('
+                        + "'viewC" + i + "'" + ').style.display=' + "'none'" + '">Close</button>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>'
+                }
+                result += '</div>';
+                viewresult += '</div>';
+                $('#y2s2').html(result);
+                $('#myview4').html(viewresult);
       });
     });
   });
@@ -323,27 +397,55 @@
     $("body").ready(function (event) {
       $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
         var result = '<div class="row">';
-        var j = jd['Y3S1'];
-        console.log(jd);
-        for (i = 0; i < j.length; i++) {
-          result += '<div class="col-md-4">'
-            + '<div class="card mb-4 shadow-sm">'
-            + '<div class="card-body">'
-            + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
-            + '<p class="card-text text-center">' + j[i].thName + '</p>'
-            + '<div class="d-flex justify-content-between align-items-center">'
-            + '<div class="btn-group">'
-            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
-            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
-            + "</div>"
-            + '<strong class="text-primary">' + j[i].id + '</strong>'
-            + "</div>"
-            + "</div>"
-            + "</div>"
-            + "</div>";
-        }
-        result += '</div>';
-        $('#y3s1').html(result);
+                var viewresult = '<div>';
+                var j = jd['Y3S1'];
+                for (i = 0; i < j.length; i++) {
+                    result += '<div class="col-md-4">'
+                        + '<div class="card mb-4 shadow-sm">'
+                        + '<div class="card-body">'
+                        + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
+                        + '<p class="card-text text-center">' + j[i].thName + '</p>'
+                        + '<div class="d-flex justify-content-between align-items-center">'
+                        + '<div class="btn-group">'
+                        + '<button id="' + "viewbtnD" + i + '" type="button" class="btn btn-sm btn-outline-secondary" onclick="fbcomment(),document.getElementById('
+                        + "'viewD" + i + "'" + ').style.display=' + "'block'" + '">' + "View" + '</button>'
+                        + "</div>"
+                        + '<strong class="text-primary">' + j[i].id + '</strong>'
+                        + "</div>"
+                        + "</div>"
+                        + "</div>"
+                        + "</div>"
+
+                    viewresult += '<div id="viewD' + i + '" class="modal">'
+                        + '<div class="modal-content animate">'
+                        + '<div class="modal-header">'
+                        + '<h5 class="modal-title ">Main Course</h5>'
+                        + '<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="document.getElementById('
+                        + "'viewD" + i + "'" + ').style.display=' + "'none'" + '">'
+                        + '<span aria-hidden="true">&times;</span>'
+                        + '</button>'
+                        + '</div>'
+                        + '<div class="modal-body">'
+                        + '<h5 class="modal-title text-primary "><b>' + j[i].enName + '</b></h5>'
+                        + '<p>' + j[i].thName + '</p>'
+                        + '<h6>' + "รหัสวิชา: " + j[i].id + '</h6>'
+                        + '<p>' + "หน่วยกิต: " + j[i].credit + '</p>'
+                        + '<hr>'
+                        + '<p><b>' + j[i].enDesc + '</b></p>'
+                        + '<p>' + j[i].thDesc + '</p>'
+                        + '<p class="fb-comments" data-href="' + 4000 + i + '" data-width="100%" data-numposts="5"></p>'
+                        + '</div>'
+                        + '<div class="modal-footer">'
+                        + '<button type="button" class="btn btn-danger" onclick="document.getElementById('
+                        + "'viewD" + i + "'" + ').style.display=' + "'none'" + '">Close</button>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>'
+                }
+                result += '</div>';
+                viewresult += '</div>';
+                $('#y3s1').html(result);
+                $('#myview5').html(viewresult);
       });
     });
   });
@@ -353,30 +455,70 @@
     $("body").ready(function (event) {
       $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
         var result = '<div class="row">';
-        var j = jd['Y3S2'];
-        console.log(jd);
-        for (i = 0; i < j.length; i++) {
-          result += '<div class="col-md-4">'
-            + '<div class="card mb-4 shadow-sm">'
-            + '<div class="card-body">'
-            + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
-            + '<p class="card-text text-center">' + j[i].thName + '</p>'
-            + '<div class="d-flex justify-content-between align-items-center">'
-            + '<div class="btn-group">'
-            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
-            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
-            + "</div>"
-            + '<strong class="text-primary">' + j[i].id + '</strong>'
-            + "</div>"
-            + "</div>"
-            + "</div>"
-            + "</div>";
-        }
-        result += '</div>';
-        $('#y3s2').html(result);
+                var viewresult = '<div>';
+                var j = jd['Y3S2'];
+                for (i = 0; i < j.length; i++) {
+                    result += '<div class="col-md-4">'
+                        + '<div class="card mb-4 shadow-sm">'
+                        + '<div class="card-body">'
+                        + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
+                        + '<p class="card-text text-center">' + j[i].thName + '</p>'
+                        + '<div class="d-flex justify-content-between align-items-center">'
+                        + '<div class="btn-group">'
+                        + '<button id="' + "viewbtnE" + i + '" type="button" class="btn btn-sm btn-outline-secondary" onclick="fbcomment(),document.getElementById('
+                        + "'viewE" + i + "'" + ').style.display=' + "'block'" + '">' + "View" + '</button>'
+                        + "</div>"
+                        + '<strong class="text-primary">' + j[i].id + '</strong>'
+                        + "</div>"
+                        + "</div>"
+                        + "</div>"
+                        + "</div>"
+
+                    viewresult += '<div id="viewE' + i + '" class="modal">'
+                        + '<div class="modal-content animate">'
+                        + '<div class="modal-header">'
+                        + '<h5 class="modal-title ">Main Course</h5>'
+                        + '<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="document.getElementById('
+                        + "'viewE" + i + "'" + ').style.display=' + "'none'" + '">'
+                        + '<span aria-hidden="true">&times;</span>'
+                        + '</button>'
+                        + '</div>'
+                        + '<div class="modal-body">'
+                        + '<h5 class="modal-title text-primary "><b>' + j[i].enName + '</b></h5>'
+                        + '<p>' + j[i].thName + '</p>'
+                        + '<h6>' + "รหัสวิชา: " + j[i].id + '</h6>'
+                        + '<p>' + "หน่วยกิต: " + j[i].credit + '</p>'
+                        + '<hr>'
+                        + '<p><b>' + j[i].enDesc + '</b></p>'
+                        + '<p>' + j[i].thDesc + '</p>'
+                        + '<p class="fb-comments" data-href="' + 5000 + i + '" data-width="100%" data-numposts="5"></p>'
+                        + '</div>'
+                        + '<div class="modal-footer">'
+                        + '<button type="button" class="btn btn-danger" onclick="document.getElementById('
+                        + "'viewE" + i + "'" + ').style.display=' + "'none'" + '">Close</button>'
+                        + '</div>'
+                        + '</div>'
+                        + '</div>'
+                }
+                result += '</div>';
+                viewresult += '</div>';
+                $('#y3s2').html(result);
+                $('#myview6').html(viewresult);
       });
     });
   });
+</script>
+
+<script>
+    function fbcomment() {
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.2&appId=2240591592844450&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    }
 </script>
 
 <script>
