@@ -19,9 +19,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
   <link rel="shortcut icon" href="image/MYS.ico" />
-  <link href="css/login.css" rel="stylesheet">
   <link href="css/home.css" rel="stylesheet">
-  <link href="css/btntotop.css" rel="stylesheet">
+  <link href="css/login.css" rel="stylesheet">
 </head>
 
 <body>
@@ -50,7 +49,7 @@
             P3TCHZ
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">My Course</a>
+            <a class="dropdown-item" href="#">My Course</a>
             <a class="dropdown-item" href="#">Logout</a>
           </div>
         </li>
@@ -154,18 +153,16 @@
 
   <!-- LOGIN -->
   <div id="loginmodal" class="modal">
-    <form class="modal-content animate">
+    <form class="modal-content animate" action="/action_page.php">
       <div class="container">
         <h4 style="text-align: center">Login</h4>
-        <hr>
-        <input type="text" placeholder="Email">
-        <input type="password" placeholder="Password">
-        <button type="submit">Login</button>
-        <hr>
-        <button type="button" onclick="document.getElementById('regismodal').style.display = 'block'">Register</button>
+        <input type="text" placeholder="Email" name="mail" required>
+        <input type="password" placeholder="Password" name="psw" required>
+        <button class="allbutton btn-success" type="submit">Login</button>
       </div>
       <div class="container" style="background-color:#f1f1f1">
-        <button type="button" onclick="document.getElementById('loginmodal').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="button" class="btn btn-danger" onclick="document.getElementById('loginmodal').style.display='none'">Cancel</button>
+        <span class="psw"> <a href="#">Create account</a></span>
       </div>
     </form>
   </div>
@@ -188,14 +185,11 @@
   </div>
 
 
-  <!-- BUTTON TO TOP -->
-
-
   <!-- FOOTER -->
   <footer class="container">
-    <p class="float-right"><a href="#">Back to top</a></p>
-    <p>Create by <a href="https://www.facebook.com/surawit.wiriyasrisuwatthana.7">K A K D E N</a></p>
-    <p>Thanks to <a href="https://getbootstrap.com/">Bootstrap</a></p>
+      <p class="float-right"><a href="#">Back to top</a></p>
+      <p>Create by <a href="https://www.facebook.com/surawit.wiriyasrisuwatthana.7">KAKDEN</a></p>
+      <p>Thanks to <a href="https://getbootstrap.com/">Bootstrap</a></p>
   </footer>
   </main>
 

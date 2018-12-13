@@ -14,7 +14,7 @@ input[type=text], input[type=password] {
 }
 
 /* Set a style for all buttons */
-button {
+.allbutton {
   background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
@@ -77,22 +77,6 @@ span.psw {
   margin: 0% auto 0% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
   width: 40%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button (x) */
-.close {
-  position: absolute;
-  right: 25px;
-  top: 0;
-  color: #000;
-  font-size: 35px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: red;
-  cursor: pointer;
 }
 
 /* Add Zoom Animation */

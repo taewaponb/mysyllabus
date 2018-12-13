@@ -52,7 +52,7 @@
             P3TCHZ
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="mycourse.html">My Course</a>
+            <a class="dropdown-item" href="mycourse.html">My Course</a>
             <a class="dropdown-item" href="#">Logout</a>
           </div>
         </li>
@@ -65,24 +65,22 @@
   </nav>
 
   <div style="display:none;" id="myDiv" class="animate-bottom">
-  <!-- LOGIN -->
-  <div id="loginmodal" class="modal">
-    <form class="modal-content animate" action="/action_page.php">
-      <div class="container">
-        <input type="text" placeholder="Username" name="uname" required>
-        <input type="password" placeholder="Password" name="psw" required>
-        <button type="submit">Login</button>
-        <label>
-          <input type="checkbox" checked="checked" name="remember"> Remember me
-        </label>
-      </div>
 
-      <div class="container" style="background-color:#f1f1f1">
-        <button type="button" onclick="document.getElementById('loginmodal').style.display='none'" class="cancelbtn">Cancel</button>
-        <span class="psw"> <a href="#">Forgot password?</a></span>
-      </div>
-    </form>
-  </div>
+    <!-- LOGIN -->
+    <div id="loginmodal" class="modal">
+      <form class="modal-content animate" action="/action_page.php">
+        <div class="container">
+          <h4 style="text-align: center">Login</h4>
+          <input type="text" placeholder="Email" name="mail" required>
+          <input type="password" placeholder="Password" name="psw" required>
+          <button class="allbutton btn-success" type="submit">Login</button>
+        </div>
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" class="btn btn-danger" onclick="document.getElementById('loginmodal').style.display='none'">Cancel</button>
+          <span class="psw"> <a href="#">Create account</a></span>
+        </div>
+      </form>
+    </div>
 
     <section class="jumbotron text-center">
       <div class="container">
@@ -96,254 +94,254 @@
 
     <!-- SUBJECT -->
     <div class="album py-5 bg-light">
-      <h1 class="text-center jumbotron-heading"><strong>1ST</strong> YEAR: <strong>1</strong> SEMESTER</h1>
+      <h1 class="text-center"><strong>1ST</strong> YEAR: <strong>1</strong> SEMESTER</h1>
       <div class="container" id="y1s1">
       </div>
     </div>
 
     <hr>
     <div class="album py-5 bg-light">
-        <h1 class="text-center jumbotron-heading"><strong>1ST</strong> YEAR: <strong>2</strong> SEMESTER</h1>
+      <h1 class="text-center"><strong>1ST</strong> YEAR: <strong>2</strong> SEMESTER</h1>
       <div class="container" id="y1s2">
       </div>
     </div>
 
     <hr>
     <div class="album py-5 bg-light">
-        <h1 class="text-center jumbotron-heading"><strong>2ND</strong> YEAR: <strong>1</strong> SEMESTER</h1>
+      <h1 class="text-center"><strong>2ND</strong> YEAR: <strong>1</strong> SEMESTER</h1>
       <div class="container" id="y2s1">
       </div>
     </div>
 
     <hr>
     <div class="album py-5 bg-light">
-        <h1 class="text-center jumbotron-heading"><strong>2ND</strong> YEAR: <strong>2</strong> SEMESTER</h1>
+      <h1 class="text-center"><strong>2ND</strong> YEAR: <strong>2</strong> SEMESTER</h1>
       <div class="container" id="y2s2">
       </div>
     </div>
 
     <hr>
     <div class="album py-5 bg-light">
-        <h1 class="text-center jumbotron-heading"><strong>3RD</strong> YEAR: <strong>1</strong> SEMESTER</h1>
+      <h1 class="text-center"><strong>3RD</strong> YEAR: <strong>1</strong> SEMESTER</h1>
       <div class="container" id="y3s1">
       </div>
     </div>
 
     <hr>
     <div class="album py-5 bg-light">
-        <h1 class="text-center jumbotron-heading"><strong>3RD</strong> YEAR: <strong>2</strong> SEMESTER</h1>
+      <h1 class="text-center"><strong>3RD</strong> YEAR: <strong>2</strong> SEMESTER</h1>
       <div class="container" id="y3s2">
       </div>
     </div>
 
     <!-- FOOTER -->
     <footer class="container">
-      <p class="float-right"><a href="#">Back to top</a></p>
-      <p>Create by <a href="https://www.facebook.com/surawit.wiriyasrisuwatthana.7">K A K D E N</a></p>
-      <p>Thanks to <a href="https://getbootstrap.com/">Bootstrap</a></p>
+        <p class="float-right"><a href="#">Back to top</a></p>
+        <p>Create by <a href="https://www.facebook.com/surawit.wiriyasrisuwatthana.7">KAKDEN</a></p>
+        <p>Thanks to <a href="https://getbootstrap.com/">Bootstrap</a></p>
     </footer>
   </div>
 </body>
 
 <script>
-    // When the user clicks anywhere outside of the modal, close it
-    var modal = document.getElementById('loginmodal');
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
+  // When the user clicks anywhere outside of the modal, close it
+  var modal = document.getElementById('loginmodal');
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
     }
+  }
 
-    // 1st YEAR 1 SEMESTER
-    $(document).ready(function () {
-        $("body").ready(function (event) {
-            $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
-             var result = '<div class="row">' ;
-                var j = jd['Y1S1'];
-                console.log(jd);
-                for (i = 0; i < j.length; i++) {
-                    result += '<div class="col-md-4">'
-                    + '<div class="card mb-4 shadow-sm">'
-                    + '<div class="card-body">'
-                    + '<div class="card-text text-center">' + '<strong>'+ j[i].enName + '</strong>' + '</div>'
-                    + '<p class="card-text text-center">' + j[i].thName + '</p>'
-                    + '<div class="d-flex justify-content-between align-items-center">'
-                    + '<div class="btn-group">'
-                    + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
-                    + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
-                    + "</div>"
-                    + '<strong class="text-primary">' + j[i].id + '</strong>'
-                    + "</div>"
-                    + "</div>"
-                    + "</div>"
-                    + "</div>";
-                }
-                result += '</div>';
-                $('#y1s1').html(result);
-            });
-        });
+  // 1st YEAR 1 SEMESTER
+  $(document).ready(function () {
+    $("body").ready(function (event) {
+      $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
+        var result = '<div class="row">';
+        var j = jd['Y1S1'];
+        console.log(jd);
+        for (i = 0; i < j.length; i++) {
+          result += '<div class="col-md-4">'
+            + '<div class="card mb-4 shadow-sm">'
+            + '<div class="card-body">'
+            + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
+            + '<p class="card-text text-center">' + j[i].thName + '</p>'
+            + '<div class="d-flex justify-content-between align-items-center">'
+            + '<div class="btn-group">'
+            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
+            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
+            + "</div>"
+            + '<strong class="text-primary">' + j[i].id + '</strong>'
+            + "</div>"
+            + "</div>"
+            + "</div>"
+            + "</div>";
+        }
+        result += '</div>';
+        $('#y1s1').html(result);
+      });
     });
+  });
 
-    // 1st YEAR 2 SEMESTER
-    $(document).ready(function () {
-        $("body").ready(function (event) {
-            $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
-             var result = '<div class="row">' ;
-                var j = jd['Y1S2'];
-                console.log(jd);
-                for (i = 0; i < j.length; i++) {
-                    result += '<div class="col-md-4">'
-                    + '<div class="card mb-4 shadow-sm">'
-                    + '<div class="card-body">'
-                    + '<div class="card-text text-center">' + '<strong>'+ j[i].enName + '</strong>' + '</div>'
-                    + '<p class="card-text text-center">' + j[i].thName + '</p>'
-                    + '<div class="d-flex justify-content-between align-items-center">'
-                    + '<div class="btn-group">'
-                    + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
-                    + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
-                    + "</div>"
-                    + '<strong class="text-primary">' + j[i].id + '</strong>'
-                    + "</div>"
-                    + "</div>"
-                    + "</div>"
-                    + "</div>";
-                }
-                result += '</div>';
-                $('#y1s2').html(result);
-            });
-        });
+  // 1st YEAR 2 SEMESTER
+  $(document).ready(function () {
+    $("body").ready(function (event) {
+      $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
+        var result = '<div class="row">';
+        var j = jd['Y1S2'];
+        console.log(jd);
+        for (i = 0; i < j.length; i++) {
+          result += '<div class="col-md-4">'
+            + '<div class="card mb-4 shadow-sm">'
+            + '<div class="card-body">'
+            + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
+            + '<p class="card-text text-center">' + j[i].thName + '</p>'
+            + '<div class="d-flex justify-content-between align-items-center">'
+            + '<div class="btn-group">'
+            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
+            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
+            + "</div>"
+            + '<strong class="text-primary">' + j[i].id + '</strong>'
+            + "</div>"
+            + "</div>"
+            + "</div>"
+            + "</div>";
+        }
+        result += '</div>';
+        $('#y1s2').html(result);
+      });
     });
+  });
 
-    // 2st YEAR 1 SEMESTER
-    $(document).ready(function () {
-        $("body").ready(function (event) {
-            $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
-             var result = '<div class="row">' ;
-                var j = jd['Y2S1'];
-                console.log(jd);
-                for (i = 0; i < j.length; i++) {
-                    result += '<div class="col-md-4">'
-                    + '<div class="card mb-4 shadow-sm">'
-                    + '<div class="card-body">'
-                    + '<div class="card-text text-center">' + '<strong>'+ j[i].enName + '</strong>' + '</div>'
-                    + '<p class="card-text text-center">' + j[i].thName + '</p>'
-                    + '<div class="d-flex justify-content-between align-items-center">'
-                    + '<div class="btn-group">'
-                    + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
-                    + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
-                    + "</div>"
-                    + '<strong class="text-primary">' + j[i].id + '</strong>'
-                    + "</div>"
-                    + "</div>"
-                    + "</div>"
-                    + "</div>";
-                }
-                result += '</div>';
-                $('#y2s1').html(result);
-            });
-        });
+  // 2st YEAR 1 SEMESTER
+  $(document).ready(function () {
+    $("body").ready(function (event) {
+      $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
+        var result = '<div class="row">';
+        var j = jd['Y2S1'];
+        console.log(jd);
+        for (i = 0; i < j.length; i++) {
+          result += '<div class="col-md-4">'
+            + '<div class="card mb-4 shadow-sm">'
+            + '<div class="card-body">'
+            + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
+            + '<p class="card-text text-center">' + j[i].thName + '</p>'
+            + '<div class="d-flex justify-content-between align-items-center">'
+            + '<div class="btn-group">'
+            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
+            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
+            + "</div>"
+            + '<strong class="text-primary">' + j[i].id + '</strong>'
+            + "</div>"
+            + "</div>"
+            + "</div>"
+            + "</div>";
+        }
+        result += '</div>';
+        $('#y2s1').html(result);
+      });
     });
+  });
 
-    // 2st YEAR 2 SEMESTER
-    $(document).ready(function () {
-        $("body").ready(function (event) {
-            $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
-             var result = '<div class="row">' ;
-                var j = jd['Y2S2'];
-                console.log(jd);
-                for (i = 0; i < j.length; i++) {
-                    result += '<div class="col-md-4">'
-                    + '<div class="card mb-4 shadow-sm">'
-                    + '<div class="card-body">'
-                    + '<div class="card-text text-center">' + '<strong>'+ j[i].enName + '</strong>' + '</div>'
-                    + '<p class="card-text text-center">' + j[i].thName + '</p>'
-                    + '<div class="d-flex justify-content-between align-items-center">'
-                    + '<div class="btn-group">'
-                    + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
-                    + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
-                    + "</div>"
-                    + '<strong class="text-primary">' + j[i].id + '</strong>'
-                    + "</div>"
-                    + "</div>"
-                    + "</div>"
-                    + "</div>";
-                }
-                result += '</div>';
-                $('#y2s2').html(result);
-            });
-        });
+  // 2st YEAR 2 SEMESTER
+  $(document).ready(function () {
+    $("body").ready(function (event) {
+      $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
+        var result = '<div class="row">';
+        var j = jd['Y2S2'];
+        console.log(jd);
+        for (i = 0; i < j.length; i++) {
+          result += '<div class="col-md-4">'
+            + '<div class="card mb-4 shadow-sm">'
+            + '<div class="card-body">'
+            + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
+            + '<p class="card-text text-center">' + j[i].thName + '</p>'
+            + '<div class="d-flex justify-content-between align-items-center">'
+            + '<div class="btn-group">'
+            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
+            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
+            + "</div>"
+            + '<strong class="text-primary">' + j[i].id + '</strong>'
+            + "</div>"
+            + "</div>"
+            + "</div>"
+            + "</div>";
+        }
+        result += '</div>';
+        $('#y2s2').html(result);
+      });
     });
+  });
 
-    // 3st YEAR 1 SEMESTER
-    $(document).ready(function () {
-        $("body").ready(function (event) {
-            $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
-             var result = '<div class="row">' ;
-                var j = jd['Y3S1'];
-                console.log(jd);
-                for (i = 0; i < j.length; i++) {
-                    result += '<div class="col-md-4">'
-                    + '<div class="card mb-4 shadow-sm">'
-                    + '<div class="card-body">'
-                    + '<div class="card-text text-center">' + '<strong>'+ j[i].enName + '</strong>' + '</div>'
-                    + '<p class="card-text text-center">' + j[i].thName + '</p>'
-                    + '<div class="d-flex justify-content-between align-items-center">'
-                    + '<div class="btn-group">'
-                    + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
-                    + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
-                    + "</div>"
-                    + '<strong class="text-primary">' + j[i].id + '</strong>'
-                    + "</div>"
-                    + "</div>"
-                    + "</div>"
-                    + "</div>";
-                }
-                result += '</div>';
-                $('#y3s1').html(result);
-            });
-        });
+  // 3st YEAR 1 SEMESTER
+  $(document).ready(function () {
+    $("body").ready(function (event) {
+      $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
+        var result = '<div class="row">';
+        var j = jd['Y3S1'];
+        console.log(jd);
+        for (i = 0; i < j.length; i++) {
+          result += '<div class="col-md-4">'
+            + '<div class="card mb-4 shadow-sm">'
+            + '<div class="card-body">'
+            + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
+            + '<p class="card-text text-center">' + j[i].thName + '</p>'
+            + '<div class="d-flex justify-content-between align-items-center">'
+            + '<div class="btn-group">'
+            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
+            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
+            + "</div>"
+            + '<strong class="text-primary">' + j[i].id + '</strong>'
+            + "</div>"
+            + "</div>"
+            + "</div>"
+            + "</div>";
+        }
+        result += '</div>';
+        $('#y3s1').html(result);
+      });
     });
+  });
 
-    // 3st YEAR 2 SEMESTER
-    $(document).ready(function () {
-        $("body").ready(function (event) {
-            $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
-             var result = '<div class="row">' ;
-                var j = jd['Y3S2'];
-                console.log(jd);
-                for (i = 0; i < j.length; i++) {
-                    result += '<div class="col-md-4">'
-                    + '<div class="card mb-4 shadow-sm">'
-                    + '<div class="card-body">'
-                    + '<div class="card-text text-center">' + '<strong>'+ j[i].enName + '</strong>' + '</div>'
-                    + '<p class="card-text text-center">' + j[i].thName + '</p>'
-                    + '<div class="d-flex justify-content-between align-items-center">'
-                    + '<div class="btn-group">'
-                    + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
-                    + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
-                    + "</div>"
-                    + '<strong class="text-primary">' + j[i].id + '</strong>'
-                    + "</div>"
-                    + "</div>"
-                    + "</div>"
-                    + "</div>";
-                }
-                result += '</div>';
-                $('#y3s2').html(result);
-            });
-        });
+  // 3st YEAR 2 SEMESTER
+  $(document).ready(function () {
+    $("body").ready(function (event) {
+      $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus/mainCourse.json', function (jd, index) {
+        var result = '<div class="row">';
+        var j = jd['Y3S2'];
+        console.log(jd);
+        for (i = 0; i < j.length; i++) {
+          result += '<div class="col-md-4">'
+            + '<div class="card mb-4 shadow-sm">'
+            + '<div class="card-body">'
+            + '<div class="card-text text-center">' + '<strong>' + j[i].enName + '</strong>' + '</div>'
+            + '<p class="card-text text-center">' + j[i].thName + '</p>'
+            + '<div class="d-flex justify-content-between align-items-center">'
+            + '<div class="btn-group">'
+            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "View" + '</button>'
+            + '<button type="button" class="btn btn-sm btn-outline-secondary">' + "Comment" + '</button>'
+            + "</div>"
+            + '<strong class="text-primary">' + j[i].id + '</strong>'
+            + "</div>"
+            + "</div>"
+            + "</div>"
+            + "</div>";
+        }
+        result += '</div>';
+        $('#y3s2').html(result);
+      });
     });
-  </script>
+  });
+</script>
 
 <script>
-    var time;
-    function myFunction() {
-      time = setTimeout(showPage, 700);
-    }
-    function showPage() {
-      document.getElementById("loader").style.display = "none";
-      document.getElementById("myDiv").style.display = "block";
-    }
-    </script>
+  var time;
+  function myFunction() {
+    time = setTimeout(showPage, 700);
+  }
+  function showPage() {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("myDiv").style.display = "block";
+  }
+</script>
 
 </html>
