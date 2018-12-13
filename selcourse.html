@@ -120,12 +120,11 @@
  $(document).ready(function () {
         $("body").ready(function (event) {
             $.getJSON('https://my-syllabus-api.firebaseio.com/syllabus.json', function (jd, index) {
-             var result = "<div";
-                var j = jd['mainCourse'];
+             var result = '<div class="col-md-4">' ;
+                var j = jd['selCourse'];
                 console.log(jd);
                 for (i = 0; i < j.length; i++) {
-                    result += ' class="col-md-4">' 
-                    + '<div class="card mb-4 shadow-sm">' 
+                    result += '<div class="card mb-4 shadow-sm">'
                     + '<div class="card-body">'
                     + '<div class="card-text text-center">' + '<strong>'+ j[i].enName + '</strong>' + '</div>'
                     + '<p class="card-text text-center">' + j[i].thName + '</p>'
@@ -137,9 +136,9 @@
                     + '<strong class="text-primary">' + j[i].id + '</strong>'
                     + "</div>"
                     + "</div>"
+                    + "</div>"
                     + "</div>";
                 }
-                result += "</div>";
                 $('#stage').html(result);
             });
         });
