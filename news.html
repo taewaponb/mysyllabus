@@ -198,7 +198,7 @@
 <script>
     $(document).ready(function () {
         $("body").ready(function (event) {
-            $.getJSON('https://www.kku.ac.th/ikku/api/news/services/topNews.php', function (jd, index) {
+            $.getJSON('https://www.kku.ac.th/ikku/api/news/services/topNews.php', crossorigin="anonymous", function (jd, index) {
 
                 var firid = document.querySelector('#firstid');
                 var secid = document.querySelector('#secondid');
@@ -291,7 +291,7 @@
                     result += '<li><a href="' + j[i].url + '" target="_blank" >' + j[i].title + '</a></li>';
                 }
                 result += "</ul>";
-                $('#stage').html(result);
+                $('#stage').html(result);   
             });
         });
     });
