@@ -1,5 +1,211 @@
-.notpass{
-    color: #950000;
+figcaption {
+    text-align: center;
+    display: block;
+
+}
+
+html {
+    width: 100%;
+
+}
+
+.carousel-inner {
+    margin-left: 7.3%;
+}
+
+#carousel-c1, #carousel-c2 {
+    width: 5%;
+}
+
+body {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-size: 5px;
+    color: #ffffff;
+    width: 100%;
+    overflow-x: auto;
+}
+
+img {
+    width: 200px;
+    height: 250px;
+
+}
+
+.grid {
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.tm-section {
+    max-width: 100%;
+}
+
+.tm-section {
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+}
+
+.grid figure {
+    position: relative;
+    float: left;
+    overflow: hidden;
+    max-width: 200px;
+    height: auto;
+    background: #3085a3;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+}
+
+.grid figure img {
+    position: relative;
+    display: block;
+    min-height: 200px;
+    max-width: 200px;
+    opacity: 0.8;
+}
+
+.grid figure figcaption {
+    padding: 1em;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1.25em;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: block;
+}
+
+.grid figure figcaption::before,
+.grid figure figcaption::after {
+    pointer-events: none;
+    display: block;
+}
+
+.grid figure figcaption,
+.grid figure figcaption > a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.grid figure figcaption > a {
+    z-index: 1000;
+    text-indent: 200%;
+    white-space: nowrap;
+    font-size: 0;
+    opacity: 0;
+}
+
+.grid figure h2 {
+    word-spacing: -0.15em;
+    font-weight: 300;
+    padding-right: 70%;
+}
+
+.grid figure h2 span {
+    font-weight: 500;
+}
+
+
+/*-----------------*/
+/***** Goliath *****/
+/*-----------------*/
+
+figure.effect-goliath {
+    background: #397C66;
+    margin: 20px;
     
 }
 
+figure.effect-goliath img,
+figure.effect-goliath h2 {
+    -webkit-transition: -webkit-transform 0.35s;
+    transition: transform 0.35s;
+
+}
+
+figure.effect-goliath img {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+figure.effect-goliath h2 {
+    font-size: 1.90rem;
+
+    display: block;
+    margin-right: 50px;
+    padding-top: 50px;
+
+}
+
+figure.effect-goliath p {
+    position: absolute;
+    left: 0px;
+}
+
+figure.effect-goliath p {
+    text-transform: none;
+    font-size: 1rem;
+    padding: 0%;
+    opacity: 0;
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+    -webkit-transform: translate3d(0, 50px, 0);
+    transform: translate3d(0, 50px, 0);
+}
+
+figure.effect-goliath:hover img {
+    -webkit-transform: translate3d(0, -80px, 0);
+    transform: translate3d(0, -80px, 0);
+}
+
+figure.effect-goliath:hover h2 {
+    -webkit-transform: translate3d(0, -100px, 0);
+    transform: translate3d(0, -100px, 0);
+
+}
+
+figure.effect-goliath:hover p {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.tm-gallery-item {
+    margin: block;
+}
+
+h1 {
+    background-color: #333;
+    font-size: 2rem;
+    padding-top: 50px;
+}
+
+#myCarousel {
+    background-color: #333;
+}
+
+.heading {
+    color: aliceblue;
+    padding-right: 70%;
+}
+
+.pic {
+   opacity: 0.4; 
+}
+
+.change{
+    background-color: #950000;
+    
+}

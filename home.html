@@ -50,18 +50,19 @@
           <a class="nav-link" href="news.html">News</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+          <a id="emailNav" class="hide nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            P3TCHZ
+            User
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="mycourse.html">My Course</a>
-            <a class="dropdown-item" href="#">Logout</a>
           </div>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
-        <input class="btn btn-outline-success my-2 my-sm-0" type="button" value="Login" onclick="document.getElementById('loginmodal').style.display='block'"
+        <input id="signInBtn" class="btn btn-outline-success my-2 my-sm-0" type="button" value="Login" onclick="document.getElementById('loginmodal').style.display='block'"
+          style="width:auto;" />
+        <input id="signOutBtn" class="btn btn-outline-danger my-2 my-sm-0 hide" type="button" value="Logout"
           style="width:auto;" />
       </form>
     </div>
@@ -94,7 +95,7 @@
             <div class="carousel-caption">
               <h1>MY COURSE</h1>
               <p>จัดการวิชาเรียนของคุณ</p>
-              <p><a class="btn btn-lg btn-primary" role="button" onclick="document.getElementById('loginmodal').style.display='block'">Login</a></p>
+              <p><a class="btn btn-lg btn-primary" role="button" href="mycourse.html">Login</a></p>
             </div>
           </div>
         </div>
@@ -164,9 +165,9 @@
       <form class="modal-content-login animate" action="home.html">
           <div class="container">
               <h4 style="text-align: center">Login</h4>
-              <input type="text" placeholder="Email" name="mail" required>
-              <input type="password" placeholder="Password" name="psw" required>
-              <button class="allbutton btn-success" type="submit">Login</button>
+              <input id="emailLogin" type="text" placeholder="Email">
+              <input id="passwordLogin" type="password" placeholder="Password">
+              <button id="loginBtn" class="allbutton btn-success" type="button">Login</button>
               <hr>
               <button type="button" class="btn btn-danger" onclick="document.getElementById('loginmodal').style.display='none'">Cancel</button>
               <span class="psw" onclick="document.getElementById('regismodal').style.display='block'"> <a href="#">Create account</a></span>
@@ -279,28 +280,30 @@
       alert('logged in');
     }
 
+    document.getElementById('loginBtn').addEventListener('click', signIn);
+    var signInBtn = document.getElementById('signInBtn');
+    var singOutBtn = document.getElementById('signOutBtn');
     firebase.auth().onAuthStateChanged(firebaseUser => {
             if(firebaseUser) {
                 console.log(firebaseUser);
-                loginForm.style.display = 'none';
-                loginBtn.classList.add('hide');
-                logoutBtn.classList.remove('hide');
+                signInBtn.classList.add('hide');
+                signOutBtn.classList.remove('hide');
+                modal.classList.add('hide');
                 emailNav.classList.remove('hide');
                 console.log("logged in");
                 console.log(firebaseUser.email);
                 console.log(firebaseUser.uid);
                 emailNav.innerHTML = firebaseUser.email;
                 console.log(firebaseUser.displayName);
-
             } else {
-                loginBtn.classList.remove('hide');
-                logoutBtn.classList.add('hide');
                 emailNav.classList.add('hide');
+                signInBtn.classList.remove('hide');
+                signOutBtn.classList.add('hide');
                 console.log('not logged in');
             }
         });
 
-        logoutBtn.addEventListener('click', e => {
+        signOutBtn.addEventListener('click', e => {
             firebase.auth().signOut();
             alert("Log out Successfully!!");
         });
