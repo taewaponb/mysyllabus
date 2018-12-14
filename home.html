@@ -23,9 +23,13 @@
   <link rel="shortcut icon" href="image/MYS.ico" />
   <link href="css/home.css" rel="stylesheet">
   <link href="css/login.css" rel="stylesheet">
+  <link href="css/loaderHome.css" rel="stylesheet">
 </head>
 
-<body>
+<body onload="myFunction()" style="margin:0;">
+
+    <div id="loader"></div>
+
   <!-- NAVIGATION BAR -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="index.html">My Syllabus</a>
@@ -51,7 +55,7 @@
             P3TCHZ
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">My Course</a>
+              <a class="dropdown-item" href="mycourse.html">My Course</a>
             <a class="dropdown-item" href="#">Logout</a>
           </div>
         </li>
@@ -62,6 +66,8 @@
       </form>
     </div>
   </nav>
+
+  <div style="display:none;" id="myDiv" class="animate-bottom">
 
   <!-- Home -->
   <main role="main">
@@ -78,7 +84,7 @@
             <div class="carousel-caption text-left">
               <h1>COURSE</h1>
               <p>ดูวิชาเรียนที่มีทั้งหมดได้ที่นี่</p>
-              <p><a class="btn btn-lg btn-primary" href="#course" role="button">Learn more</a></p>
+              <p><a class="btn btn-lg btn-primary" href="course.html" role="button">Learn more</a></p>
             </div>
           </div>
         </div>
@@ -88,7 +94,7 @@
             <div class="carousel-caption">
               <h1>MY COURSE</h1>
               <p>จัดการวิชาเรียนของคุณ</p>
-              <p><a class="btn btn-lg btn-primary" href="#mycourse" role="button">Login</a></p>
+              <p><a class="btn btn-lg btn-primary" role="button" onclick="document.getElementById('loginmodal').style.display='block'">Login</a></p>
             </div>
           </div>
         </div>
@@ -98,7 +104,7 @@
             <div class="carousel-caption text-right">
               <h1>NEWS</h1>
               <p>ข่าวสารต่างๆภายในมหาวิทยาลัยขอนแก่น</p>
-              <p><a class="btn btn-lg btn-primary" href="#kkunews" role="button">Browse</a></p>
+              <p><a class="btn btn-lg btn-primary" href="news.html" role="button">Browse</a></p>
             </div>
           </div>
         </div>
@@ -155,20 +161,18 @@
 
   <!-- LOGIN -->
   <div id="loginmodal" class="modal">
-      <form class="modal-content-login animate" action="/action_page.php">
+      <form class="modal-content-login animate" action="home.html">
           <div class="container">
               <h4 style="text-align: center">Login</h4>
               <input type="text" placeholder="Email" name="mail" required>
               <input type="password" placeholder="Password" name="psw" required>
               <button class="allbutton btn-success" type="submit">Login</button>
-          </div>
-          <div class="container" style="background-color:#f1f1f1">
+              <hr>
               <button type="button" class="btn btn-danger" onclick="document.getElementById('loginmodal').style.display='none'">Cancel</button>
               <span class="psw" onclick="document.getElementById('regismodal').style.display='block'"> <a href="#">Create account</a></span>
           </div>
       </form>
   </div>
-
   <!-- REGISTER -->
   <div id="regismodal" class="regform">
     <form class="reg-wrap animate">
@@ -180,12 +184,12 @@
         <input id="ID" type="text" placeholder="Student ID">
         <input id="email" type="text" placeholder="Email">
         <input id="password" type="password" placeholder="Password">
-        <hr>
         <button id="regis" class="allbutton">Submit</button>
+        <hr>
+        <button type="button" class="btn btn-danger" onclick="document.getElementById('regismodal').style.display='none'">Cancel</button>
       </div>
     </form>
   </div>
-
 
   <!-- FOOTER -->
   <footer class="container">
@@ -194,8 +198,10 @@
       <p>Thanks to <a href="https://getbootstrap.com/">Bootstrap</a></p>
   </footer>
   </main>
+  </div>
+</body>
 
-  <script>
+<script>
     // When the user clicks anywhere outside of the modal, close it
     var modal = document.getElementById('loginmodal');
     var regismodal = document.getElementById('regismodal')
@@ -238,6 +244,7 @@
         psword: password
       });
       console.log("Insert Success");
+      alert("Register Succesfull!");
       signUp();
     }
 
@@ -272,6 +279,50 @@
       alert('logged in');
     }
   </script>
-</body>
 
+<script>
+    // When the user clicks anywhere outside of the modal, close it
+    var modal = document.getElementById('loginmodal');
+    var regismodal = document.getElementById('regismodal')
+    window.onclick = function (event) {
+      if (event.target == modal || event.target == regismodal) {
+        modal.style.display = "none";
+        regismodal.style.display = "none";
+      }
+    }
+    var time;
+    function myFunction() {
+        time = setTimeout(showPage, 500);
+    }
+    function showPage() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
+    }
+
+    firebase.auth().onAuthStateChanged(firebaseUser => {
+            if(firebaseUser) {
+                console.log(firebaseUser);
+                loginForm.style.display = 'none';
+                loginBtn.classList.add('hide');
+                logoutBtn.classList.remove('hide');
+                emailNav.classList.remove('hide');
+                console.log("logged in");
+                console.log(firebaseUser.email);
+                console.log(firebaseUser.uid);
+                emailNav.innerHTML = firebaseUser.email;
+                console.log(firebaseUser.displayName);
+
+            } else {
+                loginBtn.classList.remove('hide');
+                logoutBtn.classList.add('hide');
+                emailNav.classList.add('hide');
+                console.log('not logged in');
+            }
+        });
+
+        logoutBtn.addEventListener('click', e => {
+            firebase.auth().signOut();
+            alert("Log out Successfully!!");
+        });
+  </script>
 </html>
