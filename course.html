@@ -92,14 +92,13 @@
               <h4 style="text-align: center">Login</h4>
               <input id="emailLogin" type="text" placeholder="Email">
               <input id="passwordLogin" type="password" placeholder="Password">
-              <button id="loginBtn" class="allbutton btn-success" type="button">Login</button>
+              <button id="loginBtn" class="allbutton btn-success" type="button" onclick="document.getElementById('loginmodal').style.display='none'">Login</button>
               <hr>
               <button type="button" class="btn btn-danger" onclick="document.getElementById('loginmodal').style.display='none'">Cancel</button>
               <span class="psw" onclick="document.getElementById('regismodal').style.display='block'"> <a href="#">Create account</a></span>
           </div>
       </form>
   </div>
-
   <!-- REGISTER -->
   <div id="regismodal" class="regform">
     <form class="reg-wrap animate">
@@ -111,7 +110,7 @@
         <input id="ID" type="text" placeholder="Student ID">
         <input id="email" type="text" placeholder="Email">
         <input id="password" type="password" placeholder="Password">
-        <button id="regis" class="allbutton" >Submit</button>
+        <button id="regis" class="allbutton" onclick="document.getElementById('regismodal').style.display='none',document.getElementById('loginmodal').style.display='none'">Submit</button>
         <hr>
         <button type="button" class="btn btn-danger" onclick="document.getElementById('regismodal').style.display='none'">Cancel</button>
       </div>
