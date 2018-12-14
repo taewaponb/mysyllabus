@@ -184,7 +184,7 @@
         <input id="ID" type="text" placeholder="Student ID">
         <input id="email" type="text" placeholder="Email">
         <input id="password" type="password" placeholder="Password">
-        <button id="regis" class="allbutton">Submit</button>
+        <button id="regis" class="allbutton" >Submit</button>
         <hr>
         <button type="button" class="btn btn-danger" onclick="document.getElementById('regismodal').style.display='none'">Cancel</button>
       </div>
@@ -244,8 +244,8 @@
         psword: password
       });
       console.log("Insert Success");
-      alert("Register Succesfull!");
       signUp();
+      alert("Register Succesfull");
     }
 
     function signUp() {
@@ -278,26 +278,6 @@
       });
       alert('logged in');
     }
-  </script>
-
-<script>
-    // When the user clicks anywhere outside of the modal, close it
-    var modal = document.getElementById('loginmodal');
-    var regismodal = document.getElementById('regismodal')
-    window.onclick = function (event) {
-      if (event.target == modal || event.target == regismodal) {
-        modal.style.display = "none";
-        regismodal.style.display = "none";
-      }
-    }
-    var time;
-    function myFunction() {
-        time = setTimeout(showPage, 500);
-    }
-    function showPage() {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("myDiv").style.display = "block";
-    }
 
     firebase.auth().onAuthStateChanged(firebaseUser => {
             if(firebaseUser) {
@@ -324,5 +304,25 @@
             firebase.auth().signOut();
             alert("Log out Successfully!!");
         });
+  </script>
+
+<script>
+    // When the user clicks anywhere outside of the modal, close it
+    var modal = document.getElementById('loginmodal');
+    var regismodal = document.getElementById('regismodal')
+    window.onclick = function (event) {
+      if (event.target == modal || event.target == regismodal) {
+        modal.style.display = "none";
+        regismodal.style.display = "none";
+      }
+    }
+    var time;
+    function myFunction() {
+        time = setTimeout(showPage, 500);
+    }
+    function showPage() {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("myDiv").style.display = "block";
+    }
   </script>
 </html>
